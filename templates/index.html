@@ -1,0 +1,253 @@
+{% extends "base.html" %}
+
+{% block title %}Campus Print - Smart Campus Printing Made Simple{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section bg-gradient-dark text-white py-5">
+    <div class="container">
+        <div class="row align-items-center min-vh-50">
+            <div class="col-lg-6">
+                <h1 class="display-3 fw-bold mb-4">
+                    Smart <span class="text-warning">Campus</span><br>
+                    Printing<br>
+                    <span class="text-warning">Made Simple</span>
+                </h1>
+                <p class="lead mb-4 text-muted">
+                    Upload your documents online, choose your print options, and get your documents printed. 
+                    No more waiting in queues or carrying USB drives.
+                </p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="{{ url_for('upload') }}" class="btn btn-warning btn-lg text-dark px-4">
+                        <i class="fas fa-print me-2"></i>Start Printing Now
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <div class="process-flow">
+                    <div class="d-flex justify-content-center align-items-center gap-3">
+                        <div class="process-step">
+                            <div class="process-icon bg-warning text-dark rounded-3 p-3 mb-2">
+                                <i class="fas fa-file-alt" style="font-size: 2rem;"></i>
+                            </div>
+                        </div>
+                        <div class="text-warning">
+                            <i class="fas fa-arrow-right" style="font-size: 1.5rem;"></i>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-icon bg-warning text-dark rounded-3 p-3 mb-2">
+                                <i class="fas fa-cog" style="font-size: 2rem;"></i>
+                            </div>
+                        </div>
+                        <div class="text-warning">
+                            <i class="fas fa-arrow-right" style="font-size: 1.5rem;"></i>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-icon bg-warning text-dark rounded-3 p-3 mb-2">
+                                <i class="fas fa-print" style="font-size: 2rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="h1 fw-bold text-white mb-3">How Campus Print Works</h2>
+                <p class="text-muted">Three simple steps to get your documents printed</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card border-0 bg-transparent text-center">
+                    <div class="card-body p-4">
+                        <div class="mb-4">
+                            <div class="bg-warning text-dark rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                                <i class="fas fa-file-upload" style="font-size: 2rem;"></i>
+                            </div>
+                        </div>
+                        <h5 class="card-title text-white mb-3">Upload Document</h5>
+                        <p class="card-text text-muted">
+                            Upload your PDF, DOC, or DOCX files. Files are safe, direct from your device, up to 10MB.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card border-0 bg-transparent text-center">
+                    <div class="card-body p-4">
+                        <div class="mb-4">
+                            <div class="bg-warning text-dark rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                                <i class="fas fa-cogs" style="font-size: 2rem;"></i>
+                            </div>
+                        </div>
+                        <h5 class="card-title text-white mb-3">Choose Options</h5>
+                        <p class="card-text text-muted">
+                            Select color or black & white printing, number of copies, double or single-sided, binding.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card border-0 bg-transparent text-center">
+                    <div class="card-body p-4">
+                        <div class="mb-4">
+                            <div class="bg-warning text-dark rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                                <i class="fas fa-hand-holding" style="font-size: 2rem;"></i>
+                            </div>
+                        </div>
+                        <h5 class="card-title text-white mb-3">Collect & Pay</h5>
+                        <p class="card-text text-muted">
+                            Visit the campus print center to collect your document and complete the order, digital and fast.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="h1 fw-bold text-white mb-3">Simple Pricing</h2>
+                <p class="text-muted">Transparent pricing with no hidden costs</p>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center g-4">
+            <div class="col-md-5">
+                <div class="card border-0 bg-transparent text-center pricing-card">
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <div class="bg-secondary text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                <i class="fas fa-file-alt" style="font-size: 1.5rem;"></i>
+                            </div>
+                        </div>
+                        <h5 class="card-title text-white mb-3">Black & White</h5>
+                        <div class="text-warning mb-2" style="font-size: 2.5rem; font-weight: bold;">₹5</div>
+                        <p class="text-muted mb-3">per page</p>
+                        <div class="text-start px-3">
+                            <p class="text-muted mb-1">• High quality printing</p>
+                            <p class="text-muted mb-1">• Fast processing</p>
+                            <p class="text-muted mb-1">• Standard paper</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-5">
+                <div class="card border-warning bg-transparent text-center pricing-card">
+                    <div class="card-header bg-warning text-dark py-2">
+                        <small class="fw-bold">POPULAR</small>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <div class="bg-warning text-dark rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                <i class="fas fa-palette" style="font-size: 1.5rem;"></i>
+                            </div>
+                        </div>
+                        <h5 class="card-title text-white mb-3">Color Printing</h5>
+                        <div class="text-warning mb-2" style="font-size: 2.5rem; font-weight: bold;">₹20</div>
+                        <p class="text-muted mb-3">per page</p>
+                        <div class="text-start px-3">
+                            <p class="text-muted mb-1">• Vibrant color output</p>
+                            <p class="text-muted mb-1">• Professional quality</p>
+                            <p class="text-muted mb-1">• Premium paper options</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Benefits Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="h1 fw-bold text-white mb-3">Why Choose Campus Print?</h2>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0 bg-transparent text-center">
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-clock text-warning" style="font-size: 2.5rem;"></i>
+                        </div>
+                        <h6 class="card-title text-white mb-3">Save Time</h6>
+                        <p class="card-text text-muted small">
+                            No more waiting in long queues. Submit and go, collect when ready. Quick and efficient.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0 bg-transparent text-center">
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-wifi text-warning" style="font-size: 2.5rem;"></i>
+                        </div>
+                        <h6 class="card-title text-white mb-3">Convenient</h6>
+                        <p class="card-text text-muted small">
+                            Upload from anywhere on campus. No need to carry files on USB or carry drives.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0 bg-transparent text-center">
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-shield-alt text-warning" style="font-size: 2.5rem;"></i>
+                        </div>
+                        <h6 class="card-title text-white mb-3">Secure</h6>
+                        <p class="card-text text-muted small">
+                            Your documents are safely processed with security measures. Academic and personal files.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="card border-0 bg-transparent text-center">
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-star text-warning" style="font-size: 2.5rem;"></i>
+                        </div>
+                        <h6 class="card-title text-white mb-3">Professional</h6>
+                        <p class="card-text text-muted small">
+                            Professional printing solutions. A4 papers. Excellent print service in academics.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <p class="text-muted small">
+                    Additional fees may apply for binding and laminating services. All prices listed without including taxes.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

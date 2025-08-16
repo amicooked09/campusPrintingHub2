@@ -1,0 +1,56 @@
+Create a full-stack campus printing management web application using Python FastAPI backend and vanilla HTML/CSS/JavaScript frontend. The design must match exactly what I'll describe below with a dark theme and yellow accent colors.
+Tech Stack Required:
+
+FastAPI (Python) for backend API
+SQLAlchemy with SQLite database
+JWT authentication
+HTML5, CSS3, vanilla JavaScript frontend
+File upload handling for documents (PDF, DOC, DOCX)
+Responsive design
+
+Exact Design Requirements:
+Color Scheme: Dark gray/black background (#1a1a1a, #2a2a2a), white text, yellow/gold accent (#D4AF37 or similar)
+Typography: Clean, modern sans-serif font
+Layout: Centered content with rounded corners on cards/sections
+Pages to Create:
+1. Landing Page (index.html)
+
+Header with "🖨️ Campus Print" logo, "Start Printing" and "Login" buttons
+Hero section: "Smart Campus Printing Made Simple" headline
+Subtext about uploading documents and getting instant quotes
+Animated printer icon or graphic
+"How Campus Print Works" section with 3 steps: Upload Document, Choose Options, Collect & Pay
+"Simple Pricing" section showing Black & White (₹5 per page) and Color Printing (₹20 per page)
+"Why Choose Campus Print?" section with 4 benefits (Save Time, Convenient, Secure, Professional)
+
+2. Registration Page (register.html)
+
+"📄 Create Your Account" header
+Form with Username, Email, Password, Confirm Password fields
+Yellow "Register" button
+"Already have an account? Login" link
+Registration note: "All new registrations are automatically assigned the 'student' role"
+
+3. Login Page (login.html)
+
+"🔑 Login to Your Account" header
+Email and Password fields
+Yellow "Login" button
+"Don't have an account? Create Account" link
+Demo credentials box showing Admin and Student login info
+
+4. Upload/Print Page (upload.html)
+
+"Upload & Print Your Documents" header
+Left section: File upload area with drag-and-drop, "Click to upload" text
+Right section: Print options form (Print Type dropdown, Number of Copies, Double-sided, Binding, Additional Notes textarea)
+Bottom: Price estimate box showing breakdown and total cost
+Yellow "Submit Print Request" button
+
+5. Admin Dashboard (admin.html)
+
+"🛡️ Admin Dashboard" header with welcome message
+System Overview cards showing Total Requests, Pending, Printing, Completed (all showing 0 initially)
+"All Print Requests" section with "No print requests yet" message
+Quick Actions buttons for Requests Pending, Currently Printing, Completed Today
+System Information section

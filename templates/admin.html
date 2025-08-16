@@ -1,0 +1,337 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - Campus Print{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Header -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card border-0" style="background: rgba(42, 42, 42, 0.8);">
+                <div class="card-body p-4">
+                    <h2 class="fw-bold text-white mb-2">
+                        <i class="fas fa-shield-alt me-2 text-warning"></i>Admin Dashboard
+                    </h2>
+                    <p class="text-muted mb-0">Welcome, admin! Manage all print requests from this dashboard.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Overview -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card border-0" style="background: rgba(42, 42, 42, 0.8);">
+                <div class="card-header border-0 text-white fw-bold" style="background: rgba(42, 42, 42, 0.9);">
+                    <i class="fas fa-chart-bar me-2"></i>System Overview
+                </div>
+                <div class="card-body">
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="text-center p-3 rounded" style="background: rgba(0,0,0,0.3);">
+                                <h2 class="text-warning fw-bold mb-1">{{ stats.total }}</h2>
+                                <p class="text-muted mb-0 small">TOTAL REQUESTS</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="text-center p-3 rounded" style="background: rgba(0,0,0,0.3);">
+                                <h2 class="text-warning fw-bold mb-1">{{ stats.pending }}</h2>
+                                <p class="text-muted mb-0 small">PENDING</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="text-center p-3 rounded" style="background: rgba(0,0,0,0.3);">
+                                <h2 class="text-warning fw-bold mb-1">{{ stats.printing }}</h2>
+                                <p class="text-muted mb-0 small">PRINTING</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="text-center p-3 rounded" style="background: rgba(0,0,0,0.3);">
+                                <h2 class="text-warning fw-bold mb-1">{{ stats.completed }}</h2>
+                                <p class="text-muted mb-0 small">COMPLETED</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card border-0" style="background: rgba(42, 42, 42, 0.8);">
+                <div class="card-header border-0 text-white fw-bold" style="background: rgba(42, 42, 42, 0.9);">
+                    <i class="fas fa-bolt me-2 text-warning"></i>Quick Actions
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="text-center p-4 rounded" style="background: rgba(183, 160, 75, 0.1); border: 1px solid rgba(183, 160, 75, 0.3);">
+                                <i class="fas fa-hourglass-half text-warning mb-2" style="font-size: 2rem;"></i>
+                                <h4 class="text-white fw-bold mb-1">{{ stats.pending }}</h4>
+                                <p class="text-muted mb-0 small">Requests Pending</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center p-4 rounded" style="background: rgba(74, 158, 255, 0.1); border: 1px solid rgba(74, 158, 255, 0.3);">
+                                <i class="fas fa-print text-info mb-2" style="font-size: 2rem;"></i>
+                                <h4 class="text-white fw-bold mb-1">{{ stats.printing }}</h4>
+                                <p class="text-muted mb-0 small">Currently Printing</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center p-4 rounded" style="background: rgba(76, 175, 80, 0.1); border: 1px solid rgba(76, 175, 80, 0.3);">
+                                <i class="fas fa-check-circle text-success mb-2" style="font-size: 2rem;"></i>
+                                <h4 class="text-white fw-bold mb-1">{{ stats.completed }}</h4>
+                                <p class="text-muted mb-0 small">Completed Today</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Print Requests -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0">
+                <div class="card-header bg-warning text-dark fw-bold d-flex justify-content-between align-items-center">
+                    <span><i class="fas fa-list me-2"></i>All Print Requests</span>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary" onclick="filterRequests('all')">
+                            <i class="fas fa-list me-1"></i>All
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning" onclick="refreshData()">
+                            <i class="fas fa-sync me-1"></i>Refresh
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% if requests %}
+                    <div class="table-responsive">
+                        <table class="table table-dark table-striped table-hover" id="requestsTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>User</th>
+                                    <th>File</th>
+                                    <th>Type</th>
+                                    <th>Pages</th>
+                                    <th>Copies</th>
+                                    <th>Cost</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for request in requests %}
+                                <tr data-status="{{ request.status }}">
+                                    <td class="text-warning fw-bold">#{{ request.id }}</td>
+                                    <td>{{ request.user.username }}</td>
+                                    <td>
+                                        <div class="text-truncate" style="max-width: 150px;" 
+                                             title="{{ request.original_filename }}">
+                                            {{ request.original_filename }}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-{{ 'secondary' if request.print_type == 'bw' else 'warning' }}">
+                                            {{ 'B&W' if request.print_type == 'bw' else 'Color' }}
+                                        </span>
+                                    </td>
+                                    <td>{{ request.pages }}</td>
+                                    <td>{{ request.copies }}</td>
+                                    <td class="text-warning fw-bold">₹{{ request.total_cost }}</td>
+                                    <td>
+                                        <span class="badge bg-{{ 'warning' if request.status == 'pending' else 'info' if request.status == 'printing' else 'success' if request.status == 'completed' else 'danger' }}">
+                                            {{ request.status.title() }}
+                                        </span>
+                                    </td>
+                                    <td>{{ request.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-outline-warning dropdown-toggle" 
+                                                    type="button" data-bs-toggle="dropdown">
+                                                Actions
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-dark">
+                                                {% if request.status == 'pending' %}
+                                                <li>
+                                                    <a class="dropdown-item" href="#" 
+                                                       onclick="updateStatus({{ request.id }}, 'printing')">
+                                                        <i class="fas fa-play me-2"></i>Start Printing
+                                                    </a>
+                                                </li>
+                                                {% endif %}
+                                                {% if request.status == 'printing' %}
+                                                <li>
+                                                    <a class="dropdown-item" href="#" 
+                                                       onclick="updateStatus({{ request.id }}, 'completed')">
+                                                        <i class="fas fa-check me-2"></i>Mark Complete
+                                                    </a>
+                                                </li>
+                                                {% endif %}
+                                                {% if request.status in ['pending', 'printing'] %}
+                                                <li>
+                                                    <a class="dropdown-item text-danger" href="#" 
+                                                       onclick="updateStatus({{ request.id }}, 'cancelled')">
+                                                        <i class="fas fa-times me-2"></i>Cancel
+                                                    </a>
+                                                </li>
+                                                {% endif %}
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" 
+                                                       onclick="viewDetails({{ request.id }})">
+                                                        <i class="fas fa-eye me-2"></i>View Details
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <div class="mb-4">
+                            <i class="fas fa-clipboard-list" style="font-size: 4rem; color: #666;"></i>
+                        </div>
+                        <h5 class="text-white mb-2">No print requests yet</h5>
+                        <p class="text-muted">Print requests will appear here when students upload documents.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Information -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card border-0" style="background: rgba(42, 42, 42, 0.8);">
+                <div class="card-header border-0 text-white fw-bold" style="background: rgba(42, 42, 42, 0.9);">
+                    <i class="fas fa-info-circle me-2 text-warning"></i>System Information
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="text-muted mb-0">
+                                <strong class="text-white">Print Queue Management:</strong> Update request status to manage the print workflow
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Request Details Modal -->
+<div class="modal fade" id="detailsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-dark border-warning">
+            <div class="modal-header border-bottom border-warning">
+                <h5 class="modal-title text-warning">Request Details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Details will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Filter requests by status
+function filterRequests(status) {
+    const rows = document.querySelectorAll('#requestsTable tbody tr');
+    
+    rows.forEach(row => {
+        if (status === 'all' || row.dataset.status === status) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+    
+    // Update active button
+    document.querySelectorAll('.btn-outline-warning').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+}
+
+// Update request status
+async function updateStatus(requestId, newStatus) {
+    try {
+        const response = await fetch('/api/update_request_status', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                request_id: requestId,
+                status: newStatus
+            })
+        });
+        
+        if (response.ok) {
+            location.reload(); // Refresh page to show updated status
+        } else {
+            alert('Failed to update status');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error updating status');
+    }
+}
+
+// View request details
+function viewDetails(requestId) {
+    const row = document.querySelector(`tr[data-status] td:first-child:contains('#${requestId}')`);
+    if (row) {
+        const rowData = row.closest('tr');
+        const cells = rowData.querySelectorAll('td');
+        
+        const details = `
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class="text-warning">Request Information</h6>
+                    <p><strong>ID:</strong> ${cells[0].textContent}</p>
+                    <p><strong>User:</strong> ${cells[1].textContent}</p>
+                    <p><strong>File:</strong> ${cells[2].textContent.trim()}</p>
+                    <p><strong>Status:</strong> ${cells[7].textContent.trim()}</p>
+                    <p><strong>Date:</strong> ${cells[8].textContent}</p>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-warning">Print Details</h6>
+                    <p><strong>Type:</strong> ${cells[3].textContent.trim()}</p>
+                    <p><strong>Pages:</strong> ${cells[4].textContent}</p>
+                    <p><strong>Copies:</strong> ${cells[5].textContent}</p>
+                    <p><strong>Total Cost:</strong> ${cells[6].textContent}</p>
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('modalBody').innerHTML = details;
+        new bootstrap.Modal(document.getElementById('detailsModal')).show();
+    }
+}
+
+// Refresh data
+function refreshData() {
+    location.reload();
+}
+
+// Auto-refresh every 30 seconds
+setInterval(refreshData, 30000);
+</script>
+{% endblock %}
